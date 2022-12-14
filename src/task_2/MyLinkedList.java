@@ -18,18 +18,20 @@ public class MyLinkedList implements MyLinkedListInterface {
 
     @Override
     public void remove(int index) {
-        int count = 0;
-        Node temp1 = null, temp2 = head;
-
-        while (count < index){
-            count++;
-            temp1 = temp2;
-            temp2 = temp2.next;
+        if (head == null)
+            return;
+        Node temp = head;
+        if (index == 0) {
+            head = temp.next;
+            return;
         }
-        if (temp1 != null) {
-            temp1.next = temp2.next;
-        }
-        temp2.next.prev = temp2.prev;
+        for (int i = 0; temp != null && i < index - 1;
+             i++)
+            temp = temp.next;
+        if (temp == null || temp.next == null)
+            return;
+        Node next = temp.next.next;
+        temp.next = next;
     }
 
     @Override

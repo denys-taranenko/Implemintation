@@ -25,9 +25,10 @@ public class MyStack implements MyStackInterface {
 
     @Override
     public void remove(int index) {
-        System.arraycopy(elements, index + 1, elements, index, this.index - index);
-        size--;
-        this.index--;
+        if (index != --size) {
+            System.arraycopy(elements, index + 1, elements, index, size - index);
+        }
+        elements[size] = null;
     }
 
     @Override
